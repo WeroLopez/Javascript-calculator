@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Calculadora</title>
+    <meta name="author" content="Wero López">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+
+</head>
+
+<body>
+
+    <div class="centro">
+        <p id="pantalla" class="display">0</p>
+
+        
+        <table>
+            <tr>
+                <th><button type="button" onclick="operador2(1)">sen</button></th>
+                <th><button type="button" onclick="operador2(2)">cos</button></th>
+                <th><button type="button" onclick="operador2(3)">tan</button></th>
+                <th><button type="button" onclick="operador2(5)">ln</button></th>
+            </tr>
+            <tr>
+                <th><button type="button" onclick="operador2(4)">&#8730;</button></th>
+                <th><button type="button" onclick="operador2(7)">x<sup>2</sup></button></th>
+                <th><button type="button" onclick="operador2(8)">&pi;</button></th>
+                <th><button type="button" onclick="operador2(6)">RNG</button></th>
+            </tr>
+            <tr>
+                <th><button type="button" onclick="escribir(7)">7</button></th>
+                <th><button type="button" onclick="escribir(8)">8</button></th>
+                <th><button type="button" onclick="escribir(9)">9</button></th>
+                <th><button type="button" onclick="operador(4)">&divide;</button></th>
+            </tr>
+            <tr>
+                <th><button type="button" onclick="escribir(4)">4</button></th>
+                <th><button type="button" onclick="escribir(5)">5</button></th>
+                <th><button type="button" onclick="escribir(6)">6</button></th>
+                <th><button type="button" onclick="operador(3)">x</button></th>
+            </tr>
+            <tr>
+                <th><button type="button" onclick="escribir(1)">1</button></th>
+                <th><button type="button" onclick="escribir(2)">2</button></th>
+                <th><button type="button" onclick="escribir(3)">3</button></th>
+                <th><button type="button" onclick="operador(2)">-</button></th>
+            </tr>
+            <tr>
+                <th><button type="button" onclick="escribir('.')">.</button></th>
+                <th><button type="button" onclick="escribir(0)">0</button></th>
+                <th><button type="button" onclick="igual()">=</button></th>
+                <th><button type="button" onclick="operador(1)">+</button></th>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        var n1;
+        var n2;
+        var primero=false;
+        var op;
+        var res;
+        var cero=true;
+
+        function escribir(n){
+            if(cero){
+                document.getElementById('pantalla').innerHTML = n;
+                cero = false;
+            }
+            else{
+                document.getElementById('pantalla').innerHTML += n;
+            }
+        }
+
+        function operador(o){
+            if(!primero){
+                n1 = document.getElementById('pantalla').innerHTML;
+                primero = true;
+                switch(o){
+                    case 1: op = 1;
+                        break;
+                    case 2: op = 2;
+                        break;
+                    case 3: op = 3;
+                        break;
+                    case 4: op = 4;
+                        break;
+                }
+                document.getElementById('pantalla').innerHTML = "0";
+                cero = true;
+            }
+        }
+
+        function igual() {
+            if(primero){
+                n2 = document.getElementById('pantalla').innerHTML;
+                primero = false;
+                switch(op){
+                    case 1: res = parseFloat(n1) + parseFloat(n2);
+                        break;
+                    case 2: res = n1 - n2;
+                        break;
+                    case 3: res = n1 * n2;
+                        break;
+                    case 4: res = n1 / n2;
+                        break;
+                }
+                document.getElementById('pantalla').innerHTML = res;
+                cero = true;
+            }
+        }
+
+        function operador2(o){
+            n1 = document.getElementById('pantalla').innerHTML;
+            primero = false;
+            switch(o){
+                case 1: document.getElementById('pantalla').innerHTML = Math.sin(n1);
+                    break;
+                case 2: document.getElementById('pantalla').innerHTML = Math.cos(n1);
+                    break;
+                case 3: document.getElementById('pantalla').innerHTML = Math.tan(n1);
+                    break;
+                case 4: document.getElementById('pantalla').innerHTML = Math.sqrt(n1);
+                    break;
+                case 5: document.getElementById('pantalla').innerHTML = Math.log(n1);
+                    break;
+                case 6: document.getElementById('pantalla').innerHTML = Math.random();
+                    break;
+                case 7: document.getElementById('pantalla').innerHTML = Math.pow(n1,2);
+                    break;
+                case 8: document.getElementById('pantalla').innerHTML = Math.PI;
+                    break;
+            }
+            cero = true;
+        }
+    </script>
+
+
+
+    <footer>
+        <div class="centro">
+            <p class="pie">Wero López, 2018 &#9400;</p>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
